@@ -1,0 +1,58 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1a1a1a;
+    color: white;
+    border-bottom: 1px solid #333;
+}
+
+.navbar-logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* --- 추가 및 수정된 스타일 --- */
+
+/* 오른쪽 메뉴들을 묶는 컨테이너 */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* 요소 사이의 간격 */
+}
+
+/* 'OOO님' 환영 메시지 */
+.welcome-message {
+    font-size: 0.9rem;
+}
+
+/* '마이페이지' 같은 일반 링크 */
+.nav-link {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+/* 로그인/로그아웃 버튼 공통 스타일 */
+.nav-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
