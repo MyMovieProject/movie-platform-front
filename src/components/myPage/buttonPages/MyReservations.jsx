@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 function MyReservations () {
     const [reservations, setReservations] = useState(null);
@@ -31,20 +32,33 @@ function MyReservations () {
 
     return (
         <div className="reservations-container">
-        <h1>나의 예매 내역</h1>
-            <ul className="reservations-list">
+            <h1>나의 예매 내역</h1>
+            <table className="reservations-table">
+                <thead>
+                <tr>
+                    <th>예매 번호</th>
+                    <th>상영 날짜</th>
+                    <th>가격</th>
+                    <th>상태</th>
+                    <th>상세보기</th>
+                </tr>
+                </thead>
+                <tbody>
                 {reservations.content.map(reservation => (
-                    <li key={reservation.id} className="reservation-item">
-                        <p><strong>아이디:</strong> {reservation.id}</p>
-                        <p><strong>상영 날짜:</strong> {reservation.reservationDate}</p>
-                        <p><strong>가격:</strong> {reservation.totalPrice}</p>
-                        <p><strong>상태:</strong> {reservation.status}</p>
-                    </li>
+                    <tr key={reservation.id}>
+                        <td>{reservation.id}</td>
+                        <td>{reservation.reservationDate}</td>
+                        <td>{reservation.totalPrice.toLocaleString()}원</td>
+                        <td>{reservation.status}</td>
+                        <td>
+                            <Link to={`/mypage/reservations/${reservation.id}`}>예매 상세</Link>
+                        </td>
+                    </tr>
                 ))}
-            </ul>
+                </tbody>
+            </table>
         </div>
     );
-
 }
 
 export default MyReservations;

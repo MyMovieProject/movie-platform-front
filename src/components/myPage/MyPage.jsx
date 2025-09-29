@@ -24,6 +24,22 @@ function MyPage () {
         myPage();
     }, [navigate]);
 
+    const handleDeleteSubmit = async (event) => {
+        event.preventDefault();
+        if (window.confirm("정말로 회원 탈퇴를 하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
+            try {
+                await axios.delete('/mypage');
+                alert('회원 탈퇴가 완료되었습니다.')
+
+                // 로그아웃 로직 추가해야할 듯
+                await axios.post('/logout');
+                navigate('/');
+            } catch (err) {
+                console.error("정보 수정 실패:", err);
+            }
+        }
+    }
+
     if (error) {
         return <div className="error-container"><p className="error-message">{error}</p></div>;
     }
@@ -35,6 +51,11 @@ function MyPage () {
                 <Link to="/mypage/me" className="mypage-button">내 정보</Link>
                 <Link to="/mypage/edit" className="mypage-button">회원 정보 수정</Link>
                 <Link to="/mypage/reservations" className="mypage-button">예매 내역 보기</Link>
+
+                <form onSubmit={handleDeleteSubmit} className="delete-form">
+                    <button type="submit" className="mypage-button delete-button">회원 탈퇴</button>
+                </form>
+
             </div>
         </div>
     );

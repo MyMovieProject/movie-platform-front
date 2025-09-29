@@ -5,6 +5,7 @@ import LoginPage from './pages/loginPage/LoginPage';
 import MyPage from "./components/myPage/MyPage";
 import MyInfo from "./components/myPage/buttonPages/MyInfo";
 import MyReservations from "./components/myPage/buttonPages/MyReservations";
+import MyInfoEdit from "./components/myPage/buttonPages/MyInfoEdit";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/me" element={<MyInfo />} />
+                    <Route path="/mypage/edit" element={<MyInfoEdit />} />
                     <Route path="/mypage/reservations" element={<MyReservations />} />
                     {/* 다른 페이지들... */}
                 </Route>
