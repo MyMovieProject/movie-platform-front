@@ -1,0 +1,56 @@
+.MyPageContainer {
+    max-width: 800px;
+    margin: 2rem auto; /* 위아래 여백, 좌우는 자동으로 중앙 정렬 */
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.MyPageContainer h1 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #333;
+}
+
+.mypage-buttons {
+    display: flex;
+    flex-direction: column; /* 버튼들을 세로로 정렬 */
+    gap: 1rem; /* 버튼 사이의 간격 */
+}
+
+.mypage-button {
+    display: block; /* 링크(a태그)를 블록 요소로 만들어 전체 너비를 차지하게 함 */
+    padding: 1rem;
+    background-color: #ffffff;
+    color: #333;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+.mypage-button:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+    transform: translateY(-2px); /* 살짝 위로 떠오르는 효과 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 에러 메시지 스타일 (기존에 사용하셨던) */
+.error-container {
+    padding: 2rem;
+    text-align: center;
+}
+.error-message {
+    color: #d93025;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 1rem;
+    border-radius: 8px;
+    display: inline-block;
+}

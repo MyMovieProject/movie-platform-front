@@ -2,6 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/home/HomePage';
 import LoginPage from './pages/loginPage/LoginPage';
+import MyPage from "./components/myPage/MyPage";
+import MyInfo from "./components/myPage/buttonPages/MyInfo";
+import MyReservations from "./components/myPage/buttonPages/MyReservations";
 
 function App() {
     return (
@@ -9,6 +12,9 @@ function App() {
                 {/* Layout을 사용하는 페이지들 */}
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/mypage" element={<MyPage />} />
+                    <Route path="/mypage/me" element={<MyInfo />} />
+                    <Route path="/mypage/reservations" element={<MyReservations />} />
                     {/* 다른 페이지들... */}
                 </Route>
                 {/* Layout을 사용하지 않는 독립적인 페이지 */}
