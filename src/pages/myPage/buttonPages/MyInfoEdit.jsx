@@ -14,7 +14,7 @@ function MyInfoEdit () {
     useEffect(() => {
         const fetchUserInfo = async  () => {
             try {
-                const response = await axios.get('/mypage/me');
+                const response = await axios.get('/api/mypage/me');
                 const userData = response.data;
 
                 setName(userData.name);
@@ -40,10 +40,10 @@ function MyInfoEdit () {
 
         try {
             // 4. 서버에 PUT 또는 PATCH 요청으로 수정된 정보를 보냅니다.
-            await axios.put('/mypage', updatedUserInfo);
+            await axios.put('/api/mypage', updatedUserInfo);
 
             alert('정보가 성공적으로 수정되었습니다.');
-            navigate('/mypage'); // 수정 완료 후 마이페이지로 이동
+            navigate('/mypage/me'); // 수정 완료 후 마이페이지로 이동
         } catch (err) {
             setError(err.response?.data?.message || "정보 수정에 실패했습니다.");
             console.error("정보 수정 실패:", err);

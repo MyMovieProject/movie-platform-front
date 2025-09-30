@@ -1,18 +1,22 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import Pagination from "../../../components/paging/Pagination";
 
 function MyReservations () {
     const [reservations, setReservations] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 번호 (0부터 시작)
+    const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchReservations = async () => {
             try {
-                const response = await axios.get('/mypage/reservations');
+                const response = await axios.get(`/api/mypage/reservations?page=${currentPage}&size=10`);
                 console.log(response.data)
-                setReservations(response.data)
+                setReservations(response.data.content)
+                setTotalPages(response.data.totalPages)
             } catch(error) {
                 setError(error.response.data.message)
             } finally {
@@ -44,7 +48,7 @@ function MyReservations () {
                 </tr>
                 </thead>
                 <tbody>
-                {reservations.content.map(reservation => (
+                {reservations.map(reservation => (
                     <tr key={reservation.id}>
                         <td>{reservation.id}</td>
                         <td>{reservation.reservationDate}</td>
@@ -57,6 +61,12 @@ function MyReservations () {
                 ))}
                 </tbody>
             </table>
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
         </div>
     );
 }

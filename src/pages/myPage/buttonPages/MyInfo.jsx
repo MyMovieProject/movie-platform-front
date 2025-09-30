@@ -9,7 +9,7 @@ function MyInfo () {
     useEffect(() => {
         const fetchUserInfo = async  () => {
             try {
-                const response = await axios.get('/mypage/me');
+                const response = await axios.get('/api/mypage/me');
                 console.log(response.data)
                 setUserInfo(response.data)
             } catch(error) {

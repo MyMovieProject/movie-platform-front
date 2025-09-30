@@ -10,7 +10,7 @@ function MyPage () {
     useEffect(() => {
         const myPage = async () => {
             try {
-                await axios.get('/mypage');
+                await axios.get('/api/mypage');
             } catch (error) {
                 if (error.response && error.response.status === 401) {
                     alert('로그인이 필요합니다.');
@@ -26,9 +26,9 @@ function MyPage () {
 
     const handleDeleteSubmit = async (event) => {
         event.preventDefault();
-        if (window.confirm("정말로 회원 탈퇴를 하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
+        if (window.confirm("정말로 회원 탈퇴를 하시겠습니까?")) {
             try {
-                await axios.delete('/mypage');
+                await axios.delete('/api/mypage');
                 alert('회원 탈퇴가 완료되었습니다.')
 
                 // 로그아웃 로직 추가해야할 듯

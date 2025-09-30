@@ -2,10 +2,10 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/home/HomePage';
 import LoginPage from './pages/loginPage/LoginPage';
-import MyPage from "./components/myPage/MyPage";
-import MyInfo from "./components/myPage/buttonPages/MyInfo";
-import MyReservations from "./components/myPage/buttonPages/MyReservations";
-import MyInfoEdit from "./components/myPage/buttonPages/MyInfoEdit";
+import MyPage from "./pages/myPage/MyPage";
+import MyInfo from "./pages/myPage/buttonPages/MyInfo";
+import MyReservations from "./pages/myPage/buttonPages/MyReservations";
+import MyInfoEdit from "./pages/myPage/buttonPages/MyInfoEdit";
 
 function App() {
     return (
