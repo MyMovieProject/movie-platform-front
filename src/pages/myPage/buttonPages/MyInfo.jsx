@@ -13,7 +13,7 @@ function MyInfo () {
                 console.log(response.data)
                 setUserInfo(response.data)
             } catch(error) {
-                setError(error.response.data.message)
+                setError(error.response.data)
             } finally {
                 setLoading(false);
             }

@@ -18,7 +18,7 @@ function MyReservations () {
                 setReservations(response.data.content)
                 setTotalPages(response.data.totalPages)
             } catch(error) {
-                setError(error.response.data.message)
+                setError(error.response.data)
             } finally {
                 setLoading(false);
             }

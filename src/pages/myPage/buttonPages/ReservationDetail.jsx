@@ -15,7 +15,7 @@ function ReservationDetail() {
                 setReservationDetail(response.data);
                 console.log(response.data);
             } catch (error) {
-                setError(error.response.data.message);
+                setError(error.response.data);
                 console.error(error);
             } finally {
                 setLoading(false);

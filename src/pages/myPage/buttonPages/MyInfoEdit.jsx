@@ -45,7 +45,7 @@ function MyInfoEdit () {
             alert('정보가 성공적으로 수정되었습니다.');
             navigate('/mypage/me'); // 수정 완료 후 마이페이지로 이동
         } catch (err) {
-            setError(err.response?.data?.message || "정보 수정에 실패했습니다.");
+            setError(err.response?.data || "정보 수정에 실패했습니다.");
             console.error("정보 수정 실패:", err);
         }
     }
