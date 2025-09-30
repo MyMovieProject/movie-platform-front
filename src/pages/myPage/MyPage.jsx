@@ -26,7 +26,7 @@ function MyPage () {
 
     const handleDeleteSubmit = async (event) => {
         event.preventDefault();
-        if (window.confirm("정말로 회원 탈퇴를 하시겠습니까?")) {
+        if (window.confirm("정말로 회원 탈퇴 하시겠습니까?")) {
             try {
                 await axios.delete('/api/mypage');
                 alert('회원 탈퇴가 완료되었습니다.')

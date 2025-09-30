@@ -26,6 +26,18 @@ function MyReservations () {
         fetchReservations();
     }, []);
 
+    const handleCancleSubmit = async (reservationId) => {
+        if (window.confirm("정말 예매를 취소하시겠습니까?")) {
+            try {
+                await axios.delete(`/api/reservations/${reservationId}`);
+                alert('예매가 성공적으로 취소되었습니다.');
+            } catch (error) {
+                const errorMessage = error.response.data;
+                alert(errorMessage);
+            }
+        }
+    }
+
     if (loading) {
         return <div>로딩 중...</div>;
     }
@@ -45,6 +57,7 @@ function MyReservations () {
                     <th>가격</th>
                     <th>상태</th>
                     <th>상세보기</th>
+                    <th>취소</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,6 +69,14 @@ function MyReservations () {
                         <td>{reservation.status}</td>
                         <td>
                             <Link to={`/mypage/reservations/${reservation.id}`}>예매 상세</Link>
+                        </td>
+                        <td>
+                            <button
+                                className="cancel-button"
+                                onClick={() => handleCancleSubmit(reservation.id)}
+                            >
+                                예매 취소
+                            </button>
                         </td>
                     </tr>
                 ))}
