@@ -19,8 +19,19 @@ export function AuthProvider({ children }) {
         checkLoginStatus();
     }, []);
 
-    const login = (userData) => {
-        setUser(userData);
+    const login = async (email, password) => {
+        try {
+            const params = new URLSearchParams();
+            params.append('email', email);
+            params.append('password', password);
+
+            const response = await axios.post('/login', params);
+            setUser(response.data);
+            return response;
+        } catch (error) {
+            setUser(null);
+            throw error; // 실패 시 에러를 다시 던져서 컴포넌트에서 에러 처리 가능
+        }
     };
 
     const logout = async () => {
