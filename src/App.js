@@ -6,6 +6,7 @@ import MyPage from "./pages/myPage/MyPage";
 import MyInfo from "./pages/myPage/buttonPages/MyInfo";
 import MyReservations from "./pages/myPage/buttonPages/MyReservations";
 import MyInfoEdit from "./pages/myPage/buttonPages/MyInfoEdit";
+import ReservationDetail from "./pages/myPage/buttonPages/ReservationDetail";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/mypage/me" element={<MyInfo />} />
                     <Route path="/mypage/edit" element={<MyInfoEdit />} />
                     <Route path="/mypage/reservations" element={<MyReservations />} />
+                    <Route path="/mypage/reservations/:reservationId" element={<ReservationDetail />} />
                     {/* 다른 페이지들... */}
                 </Route>
                 {/* Layout을 사용하지 않는 독립적인 페이지 */}
