@@ -10,7 +10,6 @@ function Layout() {
             <main className="main-content">
                 <Outlet />
             </main>
-            {/* <Footer /> */} {/* 나중에 푸터를 추가할 자리 */}
         </div>
     );
 }

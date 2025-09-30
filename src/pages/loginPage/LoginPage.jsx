@@ -2,7 +2,6 @@ import React, { useState, useContext} from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 import './LoginPage.css';
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -15,17 +14,11 @@ function LoginPage() {
         event.preventDefault();
         setError('');
 
-        const params = new URLSearchParams();
-        params.append('email', email);
-        params.append('password', password);
-
         try {
-            const response = await axios.post('/login', params);
-            console.log('로그인 성공:', response);
-            login(response.data);
+            const response = await login(email, password);
+            console.log('로그인 성공: ', response);
             navigate('/');
         } catch (err) {
-            console.log(email, password);
             console.error('로그인 실패:', err);
             setError(err.response.data.message);
         }
