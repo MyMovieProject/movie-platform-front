@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../navbar/Navbar';
+import Navbar from './navbar/Navbar';
 import './Layout.css';
 
 function Layout() {
@@ -8,7 +8,7 @@ function Layout() {
         <div className="app-layout">
             <Navbar />
             <main className="main-content">
-                <Outlet />
+                <Outlet />                 {/* 자식이 들어갈 곳*/}
             </main>
         </div>
     );

@@ -15,6 +15,7 @@ function App() {
                 {/* Layout을 사용하는 페이지들 */}
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/signup" element={<SignUpPage />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mypage/me" element={<MyInfo />} />
                     <Route path="/mypage/edit" element={<MyInfoEdit />} />
@@ -24,7 +25,6 @@ function App() {
                 </Route>
                 {/* Layout을 사용하지 않는 독립적인 페이지 */}
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
             </Routes>
     );
 }

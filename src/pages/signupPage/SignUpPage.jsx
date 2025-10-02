@@ -17,6 +17,26 @@ function SignUpPage() {
         event.preventDefault();
         setError(null);
 
+        if (userName.length < 2) {
+            setError("이름은 2글자 이상 입력해주세요.");
+            return;
+        }
+
+        if (userPassword.length < 8) {
+            setError("비밀번호는 8자 이상 입력해주세요.");
+            return;
+        }
+
+        if (!userEmail.includes('@')) {
+            setError("올바른 이메일 형식을 입력해주세요.");
+            return;
+        }
+
+        if (userPhone.length !== 11) {
+            setError("올바른 전화번호를 입력해주세요.")
+            return;
+        }
+
         try {
             const signupData = {
                 username: userName,
@@ -30,15 +50,15 @@ function SignUpPage() {
 
             alert('회원가입에 성공했습니다');
             navigate('/login');
-        } catch (error) {
-            setError(error.response?.data || '잠시 후에 시도해주십시오.');
-            alert(error)
+        } catch (err) {
+            setError(err.response?.data || '잠시 후에 시도해주십시오.');
         }
     }
 
     return (
         <div className="SignUpContainer">
             <form onSubmit={handleSubmit}>
+                {error && <p className="error-message">{error}</p>}
                 <h1>회원가입</h1>
                 <div className="input-group">
                     <label htmlFor={userEmail}></label>
