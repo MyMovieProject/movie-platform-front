@@ -16,6 +16,10 @@ function Navbar() {
         navigate('/');
     }
 
+    const signUpClick = () => {
+        navigate('/singup');
+    }
+
     return (
         <header className="navbar">
             <div className="navbar-logo">
@@ -30,6 +34,7 @@ function Navbar() {
                     </>
                 ) : (
                     <button onClick={loginClick} className={"nav-button"}>로그인</button>
+                    // <button onClick={signUpClick} className={"nav-button"}>회원가입</button>
                 )}
             </div>
         </header>
