@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { AuthContext } from '../../../contexts/AuthProvider';
 import { useNavigate, Link } from 'react-router-dom';
 import './Navbar.css';
 
@@ -16,6 +16,10 @@ function Navbar() {
         navigate('/');
     }
 
+    const signUpClick = () => {
+        navigate('/signup');
+    }
+
     return (
         <header className="navbar">
             <div className="navbar-logo">
@@ -29,7 +33,10 @@ function Navbar() {
                         <button onClick={logoutClick} className="nav-button">로그아웃</button>
                     </>
                 ) : (
-                    <button onClick={loginClick} className={"nav-button"}>로그인</button>
+                    <>
+                        <button onClick={loginClick} className={"nav-button"}>로그인</button>
+                        <button onClick={signUpClick} className={"nav-button"}>회원가입</button>
+                    </>
                 )}
             </div>
         </header>
