@@ -18,6 +18,9 @@
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    text-decoration: none;
+    color: #333;
 }
 
 .movie-card img {
@@ -30,6 +33,14 @@
     font-size: 1rem;
     padding: 10px;
     margin: 0;
+}
+
+.movie-card:visited {
+    color: #333;
+}
+
+.movie-card:hover {
+    opacity: 0.8;
 }
 
 .pagination {

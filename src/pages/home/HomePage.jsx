@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HomePage.css'
+import {Link} from "react-router-dom";
 
 function HomePage() {
     // 상태 관리
@@ -16,7 +17,7 @@ function HomePage() {
             try {
                 setLoading(true); // 데이터 요청 시작 시 로딩 상태로 변경
                 // Spring Boot API에 현재 페이지 번호와 페이지 크기를 파라미터로 요청
-                const response = await axios.get(`/movies?page=${currentPage}&size=10`);
+                const response = await axios.get(`/api/movies?page=${currentPage}&size=10`);
                 console.log('서버 응답 데이터:', response.data);
 
                 // API 응답에서 영화 목록과 전체 페이지 수를 state에 저장
@@ -58,10 +59,10 @@ function HomePage() {
             <h1>영화 플랫폼</h1>
             <div className="movie-grid">
                 {movies.map(movie => (
-                    <div key={movie.id} className="movie-card">
+                    <Link to={`/movies/${movie.id}`} key={movie.id} className="movie-card">
                         <img src={movie.posterUrl || 'https://via.placeholder.com/150'} alt={movie.title} />
                         <h3>{movie.title}</h3>
-                    </div>
+                    </Link>
                 ))}
             </div>
 

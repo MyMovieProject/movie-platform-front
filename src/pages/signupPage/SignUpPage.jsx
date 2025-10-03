@@ -56,7 +56,7 @@ function SignUpPage() {
     }
 
     return (
-        <div className="SignUpContainer">
+        <div className="SignupContainer">
             <form onSubmit={handleSubmit}>
                 {error && <p className="error-message">{error}</p>}
                 <h1>회원가입</h1>
