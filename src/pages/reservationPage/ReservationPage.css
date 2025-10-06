@@ -1,0 +1,88 @@
+.reservationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.screen-name {
+    margin-bottom: 30px;
+}
+
+.screen-display {
+    width: 80%;
+    max-width: 500px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    letter-spacing: 5px;
+}
+
+.seat-grid {
+    display: grid;
+    /* JS에서 전달받은 '--total-columns' 변수를 사용 */
+    grid-template-columns: repeat(var(--total-columns, 8), 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+/* 이용 가능한 좌석에 마우스를 올렸을 때 */
+.seat.available:hover {
+    background-color: #d1e7dd; /* 부드러운 녹색 */
+}
+
+/* 이용 불가능한 좌석 */
+.seat.unavailable {
+    background-color: #6c757d; /* 회색 */
+    color: #fff;
+    cursor: not-allowed;
+    border-color: #5a6268;
+}
+
+/* 선택된 좌석 */
+.seat.selected {
+    background-color: #0d6efd; /* 파란색 */
+    color: white;
+    border-color: #0a58ca;
+}
+
+.info-section {
+    width: 80%;
+    max-width: 500px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.reserve-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.reserve-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

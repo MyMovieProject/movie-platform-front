@@ -9,6 +9,8 @@ import MyInfoEdit from "./pages/myPage/buttonPages/MyInfoEdit";
 import ReservationDetail from "./pages/myPage/buttonPages/ReservationDetail";
 import SignUpPage from "./pages/signupPage/SignUpPage";
 import MovieDetail from "./pages/moviePage/MovieDetail";
+import ShowingPage from "./pages/showingsPage/ShowingPage";
+import ReservationPage from "./pages/reservationPage/ReservationPage";
 
 function App() {
     return (
@@ -23,7 +25,8 @@ function App() {
                     <Route path="/mypage/reservations" element={<MyReservations />} />
                     <Route path="/mypage/reservations/:reservationId" element={<ReservationDetail />} />
                     <Route path="/movies/:movieId" element={<MovieDetail />} />
-                    {/* 다른 페이지들... */}
+                    <Route path="/movies/:movieId/showings" element={<ShowingPage />} />
+                    <Route path="/movies/:movieId/showings/:showingInfoId/reservations" element={<ReservationPage />} />.
                 </Route>
                 {/* Layout을 사용하지 않는 독립적인 페이지 */}
                 <Route path="/login" element={<LoginPage />} />
