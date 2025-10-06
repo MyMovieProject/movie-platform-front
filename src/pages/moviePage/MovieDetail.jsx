@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 function MovieDetail () {
     const { movieId } = useParams();
@@ -58,6 +58,10 @@ function MovieDetail () {
                 <div className="movie-plot">
                     <h3 className="plot-head">줄거리</h3>
                     <p>{detail.plot || '줄거리 정보가 없습니다.'}</p>
+                </div>
+
+                <div>
+                    <Link to={`/movies/${movieId}/showings`} className="showingButton">예매</Link>
                 </div>
 
                 <div className="info-grid">

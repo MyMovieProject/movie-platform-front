@@ -24,7 +24,7 @@ function MyReservations () {
             }
         };
         fetchReservations();
-    }, []);
+    }, [currentPage]);
 
     const handleCancleSubmit = async (reservationId) => {
         if (window.confirm("정말 예매를 취소하시겠습니까?")) {
@@ -44,6 +44,10 @@ function MyReservations () {
 
     if (error) {
         return <p className="error-message">{error}</p>;
+    }
+
+    if (reservations.length === 0) {
+        return <div>예매내역이 없습니다.</div>
     }
 
     return (

@@ -55,7 +55,6 @@ function MyPage () {
                 <form onSubmit={handleDeleteSubmit} className="delete-form">
                     <button type="submit" className="mypage-button delete-button">회원 탈퇴</button>
                 </form>
-
             </div>
         </div>
     );
