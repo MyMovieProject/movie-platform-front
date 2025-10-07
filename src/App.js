@@ -11,6 +11,10 @@ import SignUpPage from "./pages/signupPage/SignUpPage";
 import MovieDetail from "./pages/moviePage/MovieDetail";
 import ShowingPage from "./pages/showingsPage/ShowingPage";
 import ReservationPage from "./pages/reservationPage/ReservationPage";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminMovies from "./pages/admin/buttonPages/AdminMovies";
+import AdminScreen from "./pages/admin/buttonPages/AdminScreen";
+import AdminScreenDetail from "./pages/admin/buttonPages/AdminScreenDetail";
 
 function App() {
     return (
@@ -26,7 +30,11 @@ function App() {
                     <Route path="/mypage/reservations/:reservationId" element={<ReservationDetail />} />
                     <Route path="/movies/:movieId" element={<MovieDetail />} />
                     <Route path="/movies/:movieId/showings" element={<ShowingPage />} />
-                    <Route path="/movies/:movieId/showings/:showingInfoId/reservations" element={<ReservationPage />} />.
+                    <Route path="/movies/:movieId/showings/:showingInfoId/reservations" element={<ReservationPage />} />
+                    <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/admin/movies" element={<AdminMovies />} />
+                    <Route path="/admin/screens" element={<AdminScreen />} />
+                    <Route path="/admin/screens/:screenId" element={<AdminScreenDetail />} />
                 </Route>
                 {/* Layout을 사용하지 않는 독립적인 페이지 */}
                 <Route path="/login" element={<LoginPage />} />

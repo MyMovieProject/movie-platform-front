@@ -32,7 +32,7 @@ function HomePage() {
         };
 
         fetchMovies();
-    }, [currentPage]); // currentPage가 변경될 때마다 useEffect가 다시 실행됨
+    }, [currentPage]);
 
     // 페이지 변경 핸들러
     const handlePrevPage = () => {

@@ -11,8 +11,8 @@ function MyPage () {
         const myPage = async () => {
             try {
                 await axios.get('/api/mypage');
-            } catch (error) {
-                if (error.response && error.response.status === 401) {
+            } catch (err) {
+                if (err.response && err.response.status === 401) {
                     alert('로그인이 필요합니다.');
                     navigate('/login');
                 } else {
@@ -20,7 +20,6 @@ function MyPage () {
                 }
             }
         };
-
         myPage();
     }, [navigate]);
 
