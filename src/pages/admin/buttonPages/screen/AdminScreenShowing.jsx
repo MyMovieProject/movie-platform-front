@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 
-function AdminScreenDetail () {
+function AdminScreenShowing () {
     const { screenId } = useParams();
     const [screenName, setScreenName] = useState('');
     const [showingInfos, setShowingInfos] = useState([]);
@@ -12,10 +12,14 @@ function AdminScreenDetail () {
     useEffect(() => {
         const fetchScreenDetail = async () => {
             try {
-                const response = await axios.get(`/api/admin/screens/${screenId}`);
-                setShowingInfos(response.data.content);
-                setScreenName(response.data.content[0].screenName);
-                console.log(response.data.content);
+                const response = await axios.get(`/api/admin/screens/${screenId}?page=1`);
+                const content = response.data.content;
+
+                setShowingInfos(content);
+
+                if (content && content.length > 0) {
+                    setScreenName(content[0].screenName);
+                }
             } catch (err) {
                 setError(err.response.data);
                 console.log(err.response);
@@ -37,6 +41,14 @@ function AdminScreenDetail () {
     return (
         <div className="AdminScreenDetailContainer">
             <h1>{screenName} 상영정보</h1>
+
+            <Link
+                to={`/admin/screens/${screenId}/showings`}
+                state={screenName}
+            >
+                상영일정 추가
+            </Link>
+
             <table className="showingInfo">
                 <thead>
                 <tr>
@@ -71,4 +83,4 @@ function AdminScreenDetail () {
     );
 }
 
-export default AdminScreenDetail;
+export default AdminScreenShowing;

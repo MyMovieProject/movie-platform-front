@@ -12,14 +12,14 @@ import MovieDetail from "./pages/moviePage/MovieDetail";
 import ShowingPage from "./pages/showingsPage/ShowingPage";
 import ReservationPage from "./pages/reservationPage/ReservationPage";
 import AdminPage from "./pages/admin/AdminPage";
-import AdminMovies from "./pages/admin/buttonPages/AdminMovies";
-import AdminScreen from "./pages/admin/buttonPages/AdminScreen";
-import AdminScreenDetail from "./pages/admin/buttonPages/AdminScreenDetail";
+import AdminMovies from "./pages/admin/buttonPages/movie/AdminMovies";
+import AdminScreen from "./pages/admin/buttonPages/screen/AdminScreen";
+import AdminScreenShowing from "./pages/admin/buttonPages/screen/AdminScreenShowing";
+import ShowingAdd from "./pages/admin/buttonPages/screen/showing/ShowingAdd";
 
 function App() {
     return (
             <Routes>
-                {/* Layout을 사용하는 페이지들 */}
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/signup" element={<SignUpPage />} />
@@ -34,9 +34,9 @@ function App() {
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/admin/movies" element={<AdminMovies />} />
                     <Route path="/admin/screens" element={<AdminScreen />} />
-                    <Route path="/admin/screens/:screenId" element={<AdminScreenDetail />} />
+                    <Route path="/admin/screens/:screenId" element={<AdminScreenShowing />} />
+                    <Route path="/admin/screens/:screenId/showings" element={<ShowingAdd />} />
                 </Route>
-                {/* Layout을 사용하지 않는 독립적인 페이지 */}
                 <Route path="/login" element={<LoginPage />} />
             </Routes>
     );
