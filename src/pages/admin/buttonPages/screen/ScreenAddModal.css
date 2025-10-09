@@ -1,0 +1,109 @@
+/* 전체 모달 오버레이 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 모달 컨텐츠 영역 */
+.modal-content {
+    background-color: #ffffff;
+    color: #333;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 요소들 사이의 간격 */
+}
+
+.modal-content h2 {
+    margin: 0;
+    text-align: center;
+    color: #007bff;
+    font-size: 1.8rem;
+}
+
+/* 폼 스타일 */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #495057;
+    margin-bottom: -5px; /* 라벨과 인풋 사이 간격 줄이기 */
+}
+
+/* 입력 필드 스타일 */
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.modal-content input::placeholder {
+    color: #adb5bd;
+}
+
+/* 버튼 공통 스타일 */
+.modal-content button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.modal-content button:hover {
+    transform: translateY(-2px); /* 호버 시 살짝 위로 이동 */
+}
+
+.modal-content button:active {
+    transform: translateY(0);
+}
+
+/* 추가 버튼 (Submit) */
+.modal-content form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    margin-top: 10px; /* 다른 필드와 간격 확보 */
+}
+
+.modal-content form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 닫기 버튼 */
+.close-button {
+    background-color: #6c757d; /* 회색 계열 */
+    color: white;
+}
+
+.close-button:hover {
+    background-color: #5a6268;
+}
