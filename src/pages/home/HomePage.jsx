@@ -17,6 +17,10 @@ function HomePage() {
     const initialSize = Number(searchParams.get("size")) || 10;
     const [pageSize, setPageSize] = useState(initialSize);
 
+    // 정렬
+    const initialSort = searchParams.get("sort") || 'latest';
+    const [sort, setSort] = useState(initialSort);
+
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,7 +29,7 @@ function HomePage() {
         const fetchMovies = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`/api/movies?page=${currentPage}&size=${pageSize}`);
+                const response = await axios.get(`/api/movies?page=${currentPage}&size=${pageSize}&sort=${sort}`);
                 console.log('서버 응답 데이터:', response.data);
                 setMovies(response.data.content);
                 setTotalPages(response.data.totalPages);
@@ -38,18 +42,25 @@ function HomePage() {
         };
 
         fetchMovies();
-    }, [currentPage, pageSize]);
+    }, [currentPage, pageSize, sort]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
-        setSearchParams({ page: page, size: pageSize });
+        setSearchParams({ page: page, size: pageSize, sort: sort});
     };
 
     const handleSizeChange = (e) => {
         const newSize = Number(e.target.value);
         setPageSize(newSize);
         setCurrentPage(1);
-        setSearchParams({ page: 1, size: newSize });
+        setSearchParams({ page: 1, size: newSize, sort: sort });
+    }
+
+    const handleSortChange = (e) => {
+        const newSort = e.target.value;
+        setSort(newSort);
+        setCurrentPage(1);
+        setSearchParams({page: 1, size: pageSize, sort: newSort});
     }
 
     if (loading) {
@@ -70,9 +81,11 @@ function HomePage() {
                     <option value="10">10개씩 보기</option>
                     <option value="20">20개씩 보기</option>
                 </select>
-                {/*<select>*/}
-                {/*    <option>정렬</option>*/}
-                {/*</select>*/}
+                <select onChange={handleSortChange} value={sort}>
+                    <option value="latest">최신순</option>
+                    <option value="oldest">오래된순</option>
+                    <option value="title">제목순</option>
+                </select>
             </div>
 
             <div className="movie-grid">

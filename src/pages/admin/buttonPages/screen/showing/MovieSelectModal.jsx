@@ -34,10 +34,6 @@ function MovieSelectModal ({ onClose, onSelectMovie }) {
         setCurrentPage(pageNumber);
     };
 
-    if (!isOpen) {
-        return null;
-    }
-
     return (
         <div className="modal-overlay">
             <div className="modal-content">

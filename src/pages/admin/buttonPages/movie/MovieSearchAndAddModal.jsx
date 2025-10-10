@@ -20,7 +20,7 @@ function MovieSearchAndAddModal({onClose, onMovieAdded}) {
         try {
             const response = await axios.get(`/api/movie-search?query=${query}`);
             console.log(response.data);
-            setResults(response.data);
+            setResults(response.data.content);
         } catch (err) {
             setError(err.response.data);
             console.log(err.response.data);
