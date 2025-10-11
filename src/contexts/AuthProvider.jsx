@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
             return response;
         } catch (error) {
             setUser(null);
-            throw error; // 실패 시 에러를 다시 던져서 컴포넌트에서 에러 처리 가능
+            throw error;
         }
     };
 

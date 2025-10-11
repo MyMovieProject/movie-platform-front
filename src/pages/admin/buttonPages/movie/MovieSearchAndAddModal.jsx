@@ -1,33 +1,51 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './MovieSearchAndAddModal.css';
+import Pagination from "../../../../components/paging/Pagination";
 
 function MovieSearchAndAddModal({onClose, onMovieAdded}) {
     const [query, setQuery] = useState('');
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalCount, setTotalCount] = useState(0);
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleSearch = async (e) => {
+    useEffect(() => {
+        if (!searchKeyword.trim()) {
+            return;
+        }
+
+        const fetchMovies = async () => {
+            setIsLoading(true);
+            setError(null);
+            try {
+                const response = await axios.get(`/api/movie-search?query=${searchKeyword}&page=${page}`);
+                setResults(response.data.content);
+                setTotalCount(response.data.totalElements);
+            } catch (err) {
+                setError(err.response.data || "데이터를 불러오는 중 오류가 발생했습니다.");
+                console.log(err.response.data);
+                setResults([]);
+                setTotalCount(0);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchMovies();
+    }, [searchKeyword, page]);
+
+    const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (!query.trim()) {
             alert("검색어를 입력해주세요.");
             return;
         }
-        setIsLoading(true);
-        setError(null);
-
-        try {
-            const response = await axios.get(`/api/movie-search?query=${query}`);
-            console.log(response.data);
-            setResults(response.data.content);
-        } catch (err) {
-            setError(err.response.data);
-            console.log(err.response.data);
-        } finally {
-            setIsLoading(false);
-        }
-    }
+        setPage(1);
+        setSearchKeyword(query);
+    };
 
     const handleAdd = async (movie) => {
         if (!window.confirm("영화를 추가하시겠습니까?")) {
@@ -44,11 +62,14 @@ function MovieSearchAndAddModal({onClose, onMovieAdded}) {
         }
     }
 
+    const pageSzie = 10;
+    const totalPages = Math.ceil(totalCount / pageSzie);
+
     return (
         <div className="modal-overlay">
             <div className="modal-content">
                 <h2>영화 검색 및 추가</h2>
-                <form onSubmit={handleSearch}>
+                <form onSubmit={handleSearchSubmit}>
                     <input
                         type="text"
                         value={query}
@@ -71,6 +92,14 @@ function MovieSearchAndAddModal({onClose, onMovieAdded}) {
                         </div>
                     ))}
                 </div>
+
+                {totalCount > 0 && !isLoading && (
+                    <Pagination
+                        currentPage={page}
+                        totalPages={totalPages}
+                        onPageChange={setPage}
+                    />
+                )}
 
                 <button onClick={onClose} className="close-button">닫기</button>
             </div>

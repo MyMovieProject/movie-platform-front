@@ -5,7 +5,7 @@ import './Navbar.css';
 
 function Navbar() {
     const {user, logout} = useContext(AuthContext); // AuthContext 에서 유저 상태를 가져옴
-    const navigate = useNavigate(); // 페이지 이동 기능 변수 navigate
+    const navigate = useNavigate();
 
     const loginClick = () => {
         navigate('/login');
@@ -28,7 +28,6 @@ function Navbar() {
             <div className="navbar-menu">
                 {user ? (
                     <>
-                        <span className = "welcom-message">{user.userName} 님</span>
                         <Link to ="/mypage" className="nav-link">마이페이지</Link>
                         <button onClick={logoutClick} className="nav-button">로그아웃</button>
                     </>
