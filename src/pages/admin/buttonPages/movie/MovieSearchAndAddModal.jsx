@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import './MovieSearchAndAddModal.css';
 import Pagination from "../../../../components/paging/Pagination";
+import apiClient from "../../../../api/AxiosConfig";
 
 function MovieSearchAndAddModal({onClose, onMovieAdded}) {
     const [query, setQuery] = useState('');
@@ -21,7 +21,7 @@ function MovieSearchAndAddModal({onClose, onMovieAdded}) {
             setIsLoading(true);
             setError(null);
             try {
-                const response = await axios.get(`/api/movie-search?query=${searchKeyword}&page=${page}`);
+                const response = await apiClient.get(`/api/movie-search?query=${searchKeyword}&page=${page}`);
                 setResults(response.data.content);
                 setTotalCount(response.data.totalElements);
             } catch (err) {
@@ -53,7 +53,7 @@ function MovieSearchAndAddModal({onClose, onMovieAdded}) {
         }
 
         try {
-            await axios.post(`/api/admin/movies`, movie);
+            await apiClient.post(`/api/admin/movies`, movie);
             alert("영화를 등록했습니다.");
             onMovieAdded();
         } catch (err) {

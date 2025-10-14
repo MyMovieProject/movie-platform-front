@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import axios from "axios";
 import './ScreenAddModal.css';
+import apiClient from "../../../../api/AxiosConfig";
 
 function ScreenAddModal ({onClose, onScreenAdded}) {
 
@@ -22,7 +22,7 @@ function ScreenAddModal ({onClose, onScreenAdded}) {
         }
 
         try {
-            await axios.post(`/api/admin/screens`, formData);
+            await apiClient.post(`/api/admin/screens`, formData);
             alert("상영관을 추가했습니다.");
             onScreenAdded();
         } catch (err) {

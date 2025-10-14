@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from '../../api/AxiosConfig';
 import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect} from "react";
 
@@ -8,7 +8,7 @@ function AdminPage () {
     useEffect(() => {
         const adminPage = async () => {
             try {
-                await axios.get(`/api/admin`);
+                await apiClient.get(`/api/admin`);
             } catch (err) {
                 alert(err.response.data);
                 console.log(err);

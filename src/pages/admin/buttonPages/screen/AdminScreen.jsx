@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from "react";
-import axios from "axios";
 import {Link, useSearchParams} from "react-router-dom";
 import Pagination from "../../../../components/paging/Pagination";
 import ScreenAddModal from "./ScreenAddModal";
+import apiClient from "../../../../api/AxiosConfig";
 
 function AdminScreen () {
 
@@ -21,7 +21,7 @@ function AdminScreen () {
     const fetchScreens = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`/api/admin/screens?page=${currentPage}`);
+            const response = await apiClient.get(`/api/admin/screens?page=${currentPage}`);
             console.log(response.data);
             setScreens(response.data.content);
             setTotalPages(response.data.totalPages);

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import Pagination from "../../../../../components/paging/Pagination";
 import './MovieSelectModal.css';
+import apiClient from "../../../../../api/AxiosConfig";
 
 function MovieSelectModal ({ onClose, onSelectMovie }) {
     const [movies, setMovies] = useState([]);
@@ -13,7 +13,7 @@ function MovieSelectModal ({ onClose, onSelectMovie }) {
         const fetchMovies = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`/api/movies?page=${currentPage}`);
+                const response = await apiClient.get(`/api/movies?page=${currentPage}`);
                 setMovies(response.data.content);
                 setTotalPage(response.data.totalPages);
             } catch (error) {

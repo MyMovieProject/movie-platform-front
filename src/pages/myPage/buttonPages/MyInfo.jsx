@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import axios from 'axios';
+import apiClient from "../../../api/AxiosConfig";
 
 function MyInfo () {
     const [userInfo, setUserInfo] = useState(null);
@@ -9,7 +9,7 @@ function MyInfo () {
     useEffect(() => {
         const fetchUserInfo = async  () => {
             try {
-                const response = await axios.get('/api/mypage/me');
+                const response = await apiClient.get('/api/mypage/me');
                 console.log(response.data)
                 setUserInfo(response.data)
             } catch(error) {

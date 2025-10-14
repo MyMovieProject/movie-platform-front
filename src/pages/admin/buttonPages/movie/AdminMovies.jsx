@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from "react";
-import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../../../../components/paging/Pagination";
 import MovieSearchAndAddModal from "./MovieSearchAndAddModal";
+import apiClient from "../../../../api/AxiosConfig";
 
 function AdminMovies () {
 
@@ -21,7 +21,7 @@ function AdminMovies () {
     const fetchMovies = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`/api/admin/movies?page=${currentPage}`);
+            const response = await apiClient.get(`/api/admin/movies?page=${currentPage}`);
             setMovies(response.data.content);
             setTotalPages(response.data.totalPages);
         } catch (err) {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './HomePage.css'
 import {Link, useSearchParams} from "react-router-dom";
 import Pagination from "../../components/paging/Pagination";
+import apiClient from "../../api/AxiosConfig";
 
 function HomePage() {
 
@@ -29,7 +29,7 @@ function HomePage() {
         const fetchMovies = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`/api/movies?page=${currentPage}&size=${pageSize}&sort=${sort}`);
+                const response = await apiClient.get(`/api/movies?page=${currentPage}&size=${pageSize}&sort=${sort}`);
                 console.log('서버 응답 데이터:', response.data);
                 setMovies(response.data.content);
                 setTotalPages(response.data.totalPages);

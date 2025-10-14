@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import axios from 'axios';
 import {Link} from "react-router-dom";
 import Pagination from "../../../components/paging/Pagination";
+import apiClient from "../../../api/AxiosConfig";
 
 function MyReservations () {
     const [reservations, setReservations] = useState(null);
@@ -13,7 +13,7 @@ function MyReservations () {
     useEffect(() => {
         const fetchReservations = async () => {
             try {
-                const response = await axios.get(`/api/mypage/reservations?page=${currentPage}&size=10`);
+                const response = await apiClient.get(`/api/mypage/reservations?page=${currentPage}&size=10`);
                 console.log(response.data)
                 setReservations(response.data.content)
                 setTotalPages(response.data.totalPages)
@@ -29,7 +29,7 @@ function MyReservations () {
     const handleCancleSubmit = async (reservationId) => {
         if (window.confirm("정말 예매를 취소하시겠습니까?")) {
             try {
-                await axios.delete(`/api/reservations/${reservationId}`);
+                await apiClient.delete(`/api/reservations/${reservationId}`);
                 alert('예매가 성공적으로 취소되었습니다.');
             } catch (error) {
                 const errorMessage = error.response.data;

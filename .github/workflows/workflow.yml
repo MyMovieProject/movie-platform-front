@@ -25,6 +25,8 @@ jobs:
 
         - name: Build
           run: npm run build
+          env:
+            REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }} # 빌드 시점에 백엔드 주소를 시크릿으로 주입
 
         # 배포
         - name: Docker Hub Login
@@ -36,7 +38,25 @@ jobs:
         - name: Build and push image
           uses: docker/build-push-action@v5
           with:
-            context: .
+            context: ./build
             file: ./Dockerfile
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest
+
+        - name: Deploy to Server
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.SSH_KEY }}
+            script: |
+              docker pull ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest
+              
+              if [ "$(docker ps -a -q -f name=my-front-app)" ]; then
+              docker stop my-front-app
+              docker rm my-front-app
+              fi
+
+              docker run -d -p 3000:3000 \
+              --name my-front-app \
+              ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import axios from "axios";
+import apiClient from "../../api/AxiosConfig";
 
 function ShowingPage () {
     const { movieId } = useParams();
@@ -12,7 +12,7 @@ function ShowingPage () {
         const fetchMovieShowing = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`/api/showings/${movieId}`);
+                const response = await apiClient.get(`/api/showings/${movieId}`);
                 setShowings(response.data);
                 console.log(response.data);
             } catch (err) {

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import apiClient from "../../../api/AxiosConfig";
 
 function MyInfoEdit () {
     const [name, setName] = useState('');
@@ -14,7 +14,7 @@ function MyInfoEdit () {
     useEffect(() => {
         const fetchUserInfo = async  () => {
             try {
-                const response = await axios.get('/api/mypage/me');
+                const response = await apiClient.get('/api/mypage/me');
                 const userData = response.data;
 
                 setName(userData.name);
@@ -37,7 +37,7 @@ function MyInfoEdit () {
         console.log(updatedUserInfo);
 
         try {
-            await axios.put('/api/mypage', updatedUserInfo);
+            await apiClient.put('/api/mypage', updatedUserInfo);
 
             alert('정보가 성공적으로 수정되었습니다.');
             navigate('/mypage/me'); // 수정 완료 후 마이페이지로 이동
