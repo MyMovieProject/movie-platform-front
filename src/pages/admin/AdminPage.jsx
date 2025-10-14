@@ -3,7 +3,6 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 
 function AdminPage () {
-    const [_error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -11,7 +10,6 @@ function AdminPage () {
             try {
                 await axios.get(`/api/admin`);
             } catch (err) {
-                setError(err.response.data);
                 alert(err.response.data);
                 console.log(err);
                 navigate(`/`);
