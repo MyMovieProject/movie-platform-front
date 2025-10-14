@@ -20,8 +20,6 @@ function MyInfoEdit () {
                 setName(userData.name);
                 setPhoneNumber(userData.phoneNumber);
                 setBirthDay(userData.birthDay);
-
-                console.log(birthDay);
             } catch(error) {
                 setError(error.response.data.message)
             } finally {
@@ -39,7 +37,6 @@ function MyInfoEdit () {
         console.log(updatedUserInfo);
 
         try {
-            // 4. 서버에 PUT 또는 PATCH 요청으로 수정된 정보를 보냅니다.
             await axios.put('/api/mypage', updatedUserInfo);
 
             alert('정보가 성공적으로 수정되었습니다.');

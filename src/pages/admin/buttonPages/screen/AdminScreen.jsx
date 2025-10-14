@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {Link, useSearchParams} from "react-router-dom";
 import Pagination from "../../../../components/paging/Pagination";
@@ -18,7 +18,7 @@ function AdminScreen () {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const fetchScreens = async () => {
+    const fetchScreens = useCallback(async () => {
         try {
             setLoading(true);
             const response = await axios.get(`/api/admin/screens?page=${currentPage}`);
@@ -30,11 +30,11 @@ function AdminScreen () {
         } finally {
             setLoading(false);
         }
-    };
+    }, [currentPage]);
 
     useEffect(() => {
         fetchScreens();
-    }, [currentPage]);
+    }, [fetchScreens]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);

@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 
 function AdminPage () {
-    const [error, setError] = useState(null);
+    const [_error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {

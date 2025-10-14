@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../../../../components/paging/Pagination";
@@ -18,7 +18,7 @@ function AdminMovies () {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const fetchMovies = async () => {
+    const fetchMovies = useCallback(async () => {
         try {
             setLoading(true);
             const response = await axios.get(`/api/admin/movies?page=${currentPage}`);
@@ -29,11 +29,11 @@ function AdminMovies () {
         } finally {
             setLoading(false);
         }
-    };
+    }, [currentPage]);
 
     useEffect(() => {
         fetchMovies();
-    }, [currentPage]);
+    }, [fetchMovies]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
