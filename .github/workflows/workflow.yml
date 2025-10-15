@@ -58,5 +58,6 @@ jobs:
               fi
 
               docker run -d -p 3000:3000 \
+              -m 256m \
               --name my-front-app \
               ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest
