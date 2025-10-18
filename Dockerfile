@@ -1,18 +1,9 @@
-# 최종 실행 환경만 정의합니다.
-FROM node:20-alpine
+FROM nginx:alpine
 
-# 작업 디렉토리 설정
-WORKDIR /app
+COPY build /usr/share/nginx/html
 
-# 정적 파일 서버 'serve' 설치
-RUN npm install -g serve
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# GitHub Actions에서 context를 './build'로 지정할 것이므로,
-# build 폴더의 모든 내용이 현재 위치(/app)로 복사됩니다.
-COPY . .
+EXPOSE 80
 
-# 3000번 포트 노출
-EXPOSE 3000
-
-# 서버 실행 (SPA 옵션 포함)
-CMD ["serve", "-s", ".", "-l", "3000"]
+CMD ["nginx", "-g", "daemon off;"]

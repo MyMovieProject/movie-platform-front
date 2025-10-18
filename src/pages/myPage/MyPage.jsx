@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import './MyPage.css';
 import apiClient from "../../api/AxiosConfig";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 function MyPage () {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
         const myPage = async () => {
@@ -30,10 +32,10 @@ function MyPage () {
                 await apiClient.delete('/api/mypage');
                 alert('회원 탈퇴가 완료되었습니다.')
 
-                await apiClient.post('/logout');
-                navigate('/');
+                await logout();
+                navigate(`/`);
             } catch (err) {
-                console.error("정보 수정 실패:", err);
+                console.error("탈퇴 실패:", err);
             }
         }
     }
