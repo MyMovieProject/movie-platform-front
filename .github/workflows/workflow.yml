@@ -54,11 +54,18 @@ jobs:
               docker stop my-front-app
               docker rm my-front-app
               fi
+              
+              docker run -d \
+                -m 256m \
+                --network my-app-network \
+                --name my-front-app \
+                --restart unless-stopped \
+                ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest
 
-              docker run -d -p 80:80 -p 443:443 \
-              -m 256m \
-              --network my-app-network \
-              -v /etc/letsencrypt:/etc/letsencrypt:ro \
-              -v /var/www/certbot:/var/www/certbot:ro \
-              --name my-front-app \
-              ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest
+#              docker run -d -p 80:80 -p 443:443 \
+#              -m 256m \
+#              --network my-app-network \
+#              -v /etc/letsencrypt:/etc/letsencrypt:ro \
+#              -v /var/www/certbot:/var/www/certbot:ro \
+#              --name my-front-app \
+#              ${{ secrets.DOCKER_USERNAME }}/my-app-front:latest
