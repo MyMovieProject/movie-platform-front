@@ -1,6 +1,7 @@
-import axios from "axios";
+
 import React, {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
+import apiClient from "../../../api/AxiosConfig";
 
 function ReservationDetail() {
     const { reservationId } = useParams();
@@ -11,7 +12,7 @@ function ReservationDetail() {
     useEffect(() => {
         const fetchReservationDetail = async () => {
             try {
-                const response = await axios.get(`/api/reservations/${reservationId}`);
+                const response = await apiClient.get(`/api/reservations/${reservationId}`);
                 setReservationDetail(response.data);
                 console.log(response.data);
             } catch (error) {

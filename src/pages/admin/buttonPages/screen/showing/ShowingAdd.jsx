@@ -1,7 +1,7 @@
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import React, {useState} from "react";
 import MovieSelectModal from "./MovieSelectModal";
-import axios from "axios";
+import apiClient from "../../../../../api/AxiosConfig";
 
 function ShowingAdd () {
     const { screenId } = useParams();
@@ -29,7 +29,7 @@ function ShowingAdd () {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/admin/showings', formData);
+            await apiClient.post('/api/admin/showings', formData);
             alert('상영 일정이 성공적으로 추가되었습니다.');
             navigate(`/admin/screens/${screenId}`);
         } catch (error) {

@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from "react";
-import axios from 'axios';
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import './MyPage.css';
+import apiClient from "../../api/AxiosConfig";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 function MyPage () {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
         const myPage = async () => {
             try {
-                await axios.get('/api/mypage');
+                await apiClient.get('/api/mypage');
             } catch (err) {
                 if (err.response && err.response.status === 401) {
                     alert('로그인이 필요합니다.');
@@ -27,14 +29,13 @@ function MyPage () {
         event.preventDefault();
         if (window.confirm("정말로 회원 탈퇴 하시겠습니까?")) {
             try {
-                await axios.delete('/api/mypage');
+                await apiClient.delete('/api/mypage');
                 alert('회원 탈퇴가 완료되었습니다.')
 
-                // 로그아웃 로직 추가해야할 듯
-                await axios.post('/logout');
-                navigate('/');
+                await logout();
+                navigate(`/`);
             } catch (err) {
-                console.error("정보 수정 실패:", err);
+                console.error("탈퇴 실패:", err);
             }
         }
     }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import {Link, useParams} from "react-router-dom";
+import apiClient from "../../api/AxiosConfig";
 
 function MovieDetail () {
     const { movieId } = useParams();
@@ -12,7 +12,7 @@ function MovieDetail () {
         const fetchMovieDetail = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`/api/movies/${movieId}`);
+                const response = await apiClient.get(`/api/movies/${movieId}`);
                 setDetail(response.data);
                 console.log(response.data);
             } catch (err) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import apiClient from "../../api/AxiosConfig";
 
 function SignUpPage() {
     const [userName, setUserName] = useState("");
@@ -46,7 +46,7 @@ function SignUpPage() {
                 birthDay: userBirth
             }
 
-            await axios.post('/api/signup', signupData);
+            await apiClient.post('/api/signup', signupData);
 
             alert('회원가입에 성공했습니다');
             navigate('/login');

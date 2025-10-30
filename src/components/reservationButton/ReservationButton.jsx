@@ -1,5 +1,6 @@
-import axios from "axios";
+
 import { useNavigate } from 'react-router-dom';
+import apiClient from "../../api/AxiosConfig";
 
 function ReservationButton({showingInfoId, selectedSeatsInfo}) {
 
@@ -14,7 +15,7 @@ function ReservationButton({showingInfoId, selectedSeatsInfo}) {
         const selectedSeatIds = selectedSeatsInfo.map(seat => seat.id);
 
         try {
-            const response = await axios.post('/api/reservations', {
+            const response = await apiClient.post('/api/reservations', {
                 showingInfoId: showingInfoId,
                 seatIds: selectedSeatIds,
             });

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import axios from "axios";
+import apiClient from "../../../../api/AxiosConfig";
 
 function AdminScreenShowing () {
     const { screenId } = useParams();
@@ -12,7 +12,7 @@ function AdminScreenShowing () {
     useEffect(() => {
         const fetchScreenDetail = async () => {
             try {
-                const response = await axios.get(`/api/admin/screens/${screenId}?page=1`);
+                const response = await apiClient.get(`/api/admin/screens/${screenId}?page=1`);
                 const content = response.data.content;
 
                 setShowingInfos(content);

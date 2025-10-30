@@ -1,22 +1,27 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from "../api/AxiosConfig";
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
 
-    // 앱 시작 시, 서버에 현재 로그인 상태인지 확인 요청 (새로고침해도 로그인 유지)
-    useEffect(() => {
-        const checkLoginStatus = async () => {
-            try {
-                const response = await axios.get('/api/user/me');
-                setUser(response.data);
-            } catch (error) {
+    const fetchUser = async () => {
+        try {
+            const response = await apiClient.get('/api/user/me');
+
+            if (response.status === 204 || !response.data) {
                 setUser(null);
+            } else {
+                setUser(response.data);
             }
-        };
-        checkLoginStatus();
+        } catch (error) {
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
+        fetchUser();
     }, []);
 
     const login = async (email, password) => {
@@ -25,8 +30,8 @@ export function AuthProvider({ children }) {
             params.append('email', email);
             params.append('password', password);
 
-            const response = await axios.post('/login', params);
-            setUser(response.data);
+            const response = await apiClient.post('/api/login', params);
+            await fetchUser();
             return response;
         } catch (error) {
             setUser(null);
@@ -35,8 +40,13 @@ export function AuthProvider({ children }) {
     };
 
     const logout = async () => {
-        await axios.post('/logout');
-        setUser(null);
+        try {
+            await apiClient.post('/api/logout');
+        } catch (error) {
+            console.error("Logout API Error:", error);
+        } finally {
+            setUser(null);
+        }
     };
 
     return (
