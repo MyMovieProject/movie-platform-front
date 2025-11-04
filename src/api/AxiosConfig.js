@@ -25,8 +25,6 @@ apiClient.interceptors.request.use(
     }
 );
 
-let isRefreshing = false;
-
 apiClient.interceptors.response.use(
     // 성공 핸들러
     (response) => {
@@ -51,12 +49,9 @@ apiClient.interceptors.response.use(
                 return Promise.reject(err);
             }
         }
-
-        originalRequest._retry = true;
-        isRefreshing = true;
-
         return Promise.reject(error);
     }
 );
+
 
 export default apiClient;
