@@ -25,6 +25,8 @@ apiClient.interceptors.request.use(
     }
 );
 
+let isRefreshing = false;
+
 apiClient.interceptors.response.use(
     // 성공 핸들러
     (response) => {
