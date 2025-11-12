@@ -38,7 +38,7 @@ jobs:
           run : aws s3 sync ./build s3://my-movie-app-frontend-lsm --delete
 
         - name : Invalidate CloudFront Cache
-          run : aws cloudfront create-invalidation --distribution-id E14C3H65MU7H3W --paths "/index.html"
+          run : aws cloudfront create-invalidation --distribution-id ET1IARZSCI4HO --paths "/index.html"
           
 
 #        # 배포
