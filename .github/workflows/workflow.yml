@@ -35,7 +35,7 @@ jobs:
             aws-region: ap-northeast-2
 
         - name : Upload to S3
-          run : aws s3 sync ./build s3://my-movie-app-frontend-lsm --delete
+          run : aws s3 sync ./build s3://myproject-movie.shop --delete
 
         - name : Invalidate CloudFront Cache
           run : aws cloudfront create-invalidation --distribution-id E3PYIO6X39I6NM --paths "/index.html"
