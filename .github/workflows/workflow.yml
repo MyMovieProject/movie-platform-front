@@ -38,8 +38,7 @@ jobs:
           run : aws s3 sync ./build s3://my-movie-app-frontend-lsm --delete
 
         - name : Invalidate CloudFront Cache
-          run : aws cloudfront create-invalidation --distribution-id ET1IARZSCI4HO --paths "/index.html"
-          
+          run : aws cloudfront create-invalidation --distribution-id E3PYIO6X39I6NM --paths "/index.html"
 
 #        # 배포
 #        - name: Docker Hub Login
