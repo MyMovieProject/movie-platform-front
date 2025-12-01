@@ -68,7 +68,14 @@ export function AuthProvider({ children }) {
         setAuthContextRef({ getAccessTokenFromMemory, setAccessToken, logout });
 
         const initializeAuth = async () => {
-            await fetchUser();
+            try {
+                const refreshResponse = await apiClient.post('/api/auth/refresh');
+                setAccessToken(refreshResponse.data.accessToken);
+                await fetchUser();
+            } catch (err) {
+                console.log("자동 로그인 실패:", err.response?.data);
+                logout();
+            }
         };
         initializeAuth();
     }, [getAccessTokenFromMemory, fetchUser, logout]);

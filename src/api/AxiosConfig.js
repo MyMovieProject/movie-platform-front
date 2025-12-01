@@ -44,33 +44,33 @@ apiClient.interceptors.response.use(
         // 원 요청
         const originalRequest = error.config;
 
-        if (error.response && error.response.status === 401 && error.response.data) {
+        if (originalRequest.url === '/api/auth/refresh') {
+            return Promise.reject(error);
+        }
+
+        if (error.response && error.response.status === 401 ) {
 
             const errorCode = error.response.data.error;
 
-            if(errorCode === 'EXPIRED') {
-                if (originalRequest.url === '/api/auth/refresh') {
-                    authContextRef.logout();
-                    return Promise.reject(error);
-                }
-
+            if (errorCode === 'EXPIRED' || errorCode === 'NOT_EXISTS') {
                 try {
                     const refreshResponse = await apiClient.post('/api/auth/refresh');
                     const newAccessToken = refreshResponse.data.accessToken;
-
                     authContextRef.setAccessToken(newAccessToken);
 
                     return apiClient(originalRequest);
                 } catch (err) {
+                    console.error("Refresh failed:", err.response?.data);
                     authContextRef.logout();
-                    return Promise.reject(err);
                 }
             }
-            else if (errorCode === 'INVALID') {
-                console.error("Invalid token");
+
+            if (errorCode === 'INVALID') {
+                console.error("Invalid AccessToken");
                 authContextRef.logout();
             }
         }
+
         return Promise.reject(error);
     }
 );
