@@ -85,7 +85,7 @@ export function AuthProvider({ children }) {
     }, [getAccessTokenFromMemory, fetchUser, logout]);
 
     if (isInitializing) {
-            return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>; // 혹은 스피너 컴포넌트
+        return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>; // 혹은 스피너 컴포넌트
     }
 
     return (
