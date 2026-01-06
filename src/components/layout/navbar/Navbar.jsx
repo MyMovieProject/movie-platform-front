@@ -17,7 +17,7 @@ function Navbar() {
     }
 
     const signUpClick = () => {
-        navigate('/signup');
+        navigate('/sign');
     }
 
     return (

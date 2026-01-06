@@ -9,6 +9,8 @@ export function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
 
+    const [isInitializing, setIsInitializing] = useState(true);
+
     const setAccessToken = (token) => {
         accessTokenRef.current = token;
         console.log(token);
@@ -68,10 +70,23 @@ export function AuthProvider({ children }) {
         setAuthContextRef({ getAccessTokenFromMemory, setAccessToken, logout });
 
         const initializeAuth = async () => {
-            await fetchUser();
+            try {
+                const refreshResponse = await apiClient.post('/api/auth/refresh');
+                setAccessToken(refreshResponse.data.accessToken);
+                await fetchUser();
+            } catch (err) {
+                console.log("자동 로그인 실패:", err.response?.data);
+                logout();
+            } finally {
+                setIsInitializing(false);
+            }
         };
         initializeAuth();
     }, [getAccessTokenFromMemory, fetchUser, logout]);
+
+    if (isInitializing) {
+        return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>; // 혹은 스피너 컴포넌트
+    }
 
     return (
         <AuthContext.Provider value={{ user, login, logout}}>
